@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pet Image Recognition</title>
-    <link rel="stylesheet" type="text/css" href="C:\Users\Sushil\Desktop\frontend\style.css">
+    <title>Object Detection</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="image-container">
             <img id="image-preview" src="" alt="Image Preview">
+            <input type="file" id="input-image">
         </div>
+        <canvas id="canvas"></canvas>
         <div class="output-container">
-            <h2>Output:</h2>
-            <p>Pet Name: <span id="pet-name"></span></p>
-            <p><span id="latency"></span></p>
+            <h2>Object Details:</h2>
+            <p>Category: <span id="category"></span></p>
+            <p>Subcategory: <span id="subcategory"></span></p>
+            <p>Confidence: <span id="confidence"></span></p>
+            <p>Location: <span id="location"></span></p>
+            <p>Object Count: <span id="object-count"></span></p>
         </div>
         <div class="button-container">
             <button id="clear-button">Clear</button>
-            <button id="submit-button">Submit</button>
+            <button id="detect-button">Detect Object</button>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
         </div>
     </div>
 
-    <script src="C:\Users\Sushil\Desktop\frontend\scripts.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
