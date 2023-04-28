@@ -1,101 +1,90 @@
-const inputImage = document.getElementById('input-image');
-const imagePreview = document.getElementById('image-preview');
-const canvas = document.getElementById('canvas');
-const category = document.getElementById('category');
-const subcategory = document.getElementById('subcategory');
-const confidence = document.getElementById('confidence');
-const location = document.getElementById('location');
-const objectCount = document.getElementById('object-count');
-const clearButton = document.getElementById('clear-button');
-const detectButton = document.getElementById('detect-button');
-const progressBar = document.getElementById('progress-bar');
+// Get the modal
+var modal = document.getElementById("myModal");
 
-let model;
-let predictions = [];
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-// Load the TensorFlow.js model
-async function loadModel() {
-    model = await tf.loadGraphModel('model/model.json');
-}
+// Get the table body element
+var tableBody = document.querySelector("tbody");
 
-// Clear the canvas and output container
-function clearOutput() {
-    predictions = [];
-    category.innerText = '';
-    subcategory.innerText = '';
-    confidence.innerText = '';
-    location.innerText = '';
-    objectCount.innerText = '';
-    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-}
+// Define an array of image objects
+var images = [
+  {
+    filename: "cat.jpg",
+    date: "23.04.2023",
+    object: "cat",
+    confidence: 90,
+    location: "Living room",
+    objectCount: 1,
+  },
+  {
+    filename: "dog.jpg",
+    date: "23.04.2023",
+    object: "dog",
+    confidence: 85,
+    location: "Backyard",
+    objectCount: 2,
+  },
+  {
+    filename: "bird.jpg",
+    date: "22.04.2023",
+    object: "bird",
+    confidence: 80,
+    location: "Front porch",
+    objectCount: 1,
+  },
+];
 
-// Draw the bounding box around the detected object
-function drawBoundingBox(prediction) {
-    const ctx = canvas.getContext('2d');
-    ctx.beginPath();
-    ctx.lineWidth = '2';
-    ctx.strokeStyle = 'red';
-    ctx.rect(prediction.bbox[0], prediction.bbox[1], prediction.bbox[2], prediction.bbox[3]);
-    ctx.stroke();
-}
+// Loop through the images array and add a row to the table for each image
+images.forEach(function (image) {
+  // Create a new row element
+  var row = document.createElement("tr");
 
-// Update the output container with the details of the detected object(s)
-function updateOutput() {
-    if (predictions.length > 0) {
-        // Display the details of the first detected object
-        category.innerText = predictions[0].class;
-        subcategory.innerText = predictions[0].subclass;
-        confidence.innerText = `${(predictions[0].score * 100).toFixed(2)}%`;
-        location.innerText = `[${predictions[0].bbox[0]}, ${predictions[0].bbox[1]}, ${predictions[0].bbox[2]}, ${predictions[0].bbox[3]}]`;
-        objectCount.innerText = predictions.length.toString();
-        // Draw the bounding box around the first detected object
-        drawBoundingBox(predictions[0]);
-    } else {
-        // Clear the output container if no objects were detected
-        clearOutput();
-    }
-}
+  // Create a new cell element for the image filename
+  var filenameCell = document.createElement("td");
+  filenameCell.textContent = image.filename;
 
-// Detect objects in the input image
-async function detectObjects() {
-    // Clear the previous output
-    clearOutput();
+  // Create a new cell element for the date and time
+  var datetimeCell = document.createElement("td");
+  datetimeCell.textContent = image.date;
 
-    // Get the input image data
-    const input = tf.browser.fromPixels(imagePreview);
-    const imageHeight = input.shape[0];
-    const imageWidth = input.shape[1];
+  // Create a new cell element for the view button
+  var viewButtonCell = document.createElement("td");
+  var viewButton = document.createElement("button");
+  viewButton.textContent = "View";
+  viewButton.addEventListener("click", function () {
+    // Set the modal image source
+    document.getElementById("modalImage").src = "images/" + image.filename;
 
-    // Preprocess the image
-    const preprocessedInput = tf.image.resizeBilinear(input, [300, 300]).div(255.0).expandDims();
-    
-    // Run the model on the preprocessed image
-    const predictionsTensor = await model.predict(preprocessedInput).array();
-    predictions = tf.util.squeeze(predictionsTensor, 0);
+    // Set the modal object details
+    document.getElementById("modalObject").textContent = image.object;
+    document.getElementById("modalConfidence").textContent = image.confidence;
+    document.getElementById("modalLocation").textContent = image.location;
+    document.getElementById("modalObjectCount").textContent =
+      image.objectCount;
 
-    // Filter out low-confidence detections
-    const threshold = 0.5;
-    predictions = predictions.filter(prediction => prediction.score > threshold);
+    // Show the modal
+    modal.style.display = "block";
+  });
+  viewButtonCell.appendChild(viewButton);
 
-    // Convert the bounding box coordinates from normalized values to pixel values
-    predictions.forEach(prediction => {
-        prediction.bbox[0] *= imageWidth;
-        prediction.bbox[1] *= imageHeight;
-        prediction.bbox[2] *= imageWidth;
-        prediction.bbox[3] *= imageHeight;
-    });
+  // Append the cells to the row
+  row.appendChild(filenameCell);
+  row.appendChild(datetimeCell);
+  row.appendChild(viewButtonCell);
 
-    // Update the output container
-    updateOutput();
-}
-
-// Load the model on page load
-window.addEventListener('load', () => {
-    loadModel();
+  // Append the row to the table body
+  tableBody.appendChild(row);
 });
 
-// Handle input image change
-inputImage.addEventListener('change', () => {
-    const file = inputImage.files[0];
-    if (file) {
-        // Display the selected
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
