@@ -1,0 +1,153 @@
+/* Homepage table CSS */
+
+header {
+  background-color: #356ccb;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #444;
+}
+
+td img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+td button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+td button:hover {
+  background-color: #3e8e41;
+}
+
+/* Popout CSS */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Caption text */
+.modal-caption {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  display: block;
+}
+
+/* Object details */
+.object-details {
+  margin-top: 20px;
+}
+
+.object-details p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Image container */
+.image-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 500px;
+}
+
+/* Object info */
+.object-info {
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.object-info h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.object-info p {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Footer styles */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+}
+
