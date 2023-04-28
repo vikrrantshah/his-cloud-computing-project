@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Object Detection</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+	<title>Object Detection</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Pet Detection</h1>
-        <p>Are you ready to check whether your pet is a dog or a cat?<span class="emoji">😂</span></p>
-    </header>
-    
-    <div class="container">
-        <div class="image-container">
-            <img id="image-preview" src="" alt="Image Preview">
-            <input type="file" id="input-image">
-        </div>
-        <canvas id="canvas"></canvas>
-        <div class="output-container">
-            <h2>Object Details:</h2>
-            <p>Category: <span id="category"></span></p>
-            <p>Subcategory: <span id="subcategory"></span></p>
-            <p>Confidence: <span id="confidence"></span></p>
-            <p>Location: <span id="location"></span></p>
-            <p>Object Count: <span id="object-count"></span></p>
-        </div>
-        <div class="button-container">
-            <button id="clear-button">Clear</button>
-            <button id="detect-button">Detect Object</button>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-    </div>
+	<header>
+		<h1>Pet Detection</h1>
+		<p>Are you ready to check whether your pet is a dog or a cat?</span></p>
+</header>
 
-    <footer>
-        <p>&copy; Frankfurt University of Applied Sciences - Cloud Project HIS group 3 (Sushil Koirala, Vikrant Shah, Sai Kumar, Shikha Singh, Zaghman Saghir) </p>
-    </footer>
+	<div class="container">
+		<table>
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Date and Time</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Here is where the rows will be dynamically added -->
+			</tbody>
+		</table>
+	</div>
 
-    <script src="scripts.js"></script>
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<img id="modalImage" src="" alt="">
+			<h2>Object Details</h2>
+			<p>Object: <span id="modalObject"></span></p>
+			<p>Confidence Level: <span id="modalConfidence"></span></p>
+			<p>Location: <span id="modalLocation"></span></p>
+			<p>Object Count: <span id="modalObjectCount"></span></p>
+		</div>
+	</div>
+
+	<footer>
+		<p>&copy; Frankfurt University of Applied Sciences - Cloud Project HIS group 3 (Sushil Koirala, Vikrant Shah, Sai Kumar, Shikha Singh, Zaghman Saghir) </p>
+</footer>
+
+	<script src="script.js"></script>
 </body>
 </html>
+
