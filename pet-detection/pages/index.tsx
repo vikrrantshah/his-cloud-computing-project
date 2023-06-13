@@ -99,7 +99,7 @@ const ListCard: FC<ListCardProps> = ({ item }) => {
                       className="btn btn-primary"
                       onClick={(e) => {
                         e.preventDefault();
-                        navigator.clipboard.writeText(`${host}/api/${item.id}`);
+                        navigator.clipboard.writeText(`/api/${item.id}`);
                       }}
                     >
                       <FaCopy /> API URI
