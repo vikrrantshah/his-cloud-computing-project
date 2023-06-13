@@ -3,13 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const prisma = new PrismaClient();
-  if (req.method === "POST") {
-    const data = req.body;
-    const captureData = await prisma.captureData.create({ data });
-    return res.status(200).json({ data: captureData });
-  }
   if (req.method === "GET") {
-    const captureData = await prisma.captureData.findMany();
+    const {id} = req.query;
+    if(typeof id !== 'string') return res.status(400);
+    const captureData = await prisma.captureData.findUnique({where:{id}});
+    if(!captureData) return res.status(404).json({message:`No data item found for Id:${id}.`})
     return res.status(200).json(captureData);
   }
   return res.status(405).json({ error: "Method not allowed" });
