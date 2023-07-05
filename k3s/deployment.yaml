@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pet-detection-web
+  labels:
+    app: nodeapp
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+        - name: nodeapp
+          image: vikrantshah/pet-detection-web:latest
+          ports:
+            - containerPort: 3000
