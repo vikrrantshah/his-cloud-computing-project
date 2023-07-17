@@ -1,9 +1,9 @@
-sudo kubectl apply -f minio-storage.yaml \
+sudo kubectl apply -f storage-volume.yaml \
 && sleep 5 \
-&& sudo kubectl apply -f minio.yaml \
+&& sudo kubectl apply -f storage-deployment.yaml \
 && sleep 5 \
-&& sudo kubectl apply -f minio-service.yaml \
+&& sudo kubectl apply -f storage-service.yaml \
 && sleep 5 \
-&& sudo kubectl apply -f webapp.yaml \
+&& sudo kubectl apply -f web-deployment.yaml \
 && sleep 5 \
-&& sudo kubectl apply -f webapp-service.yaml
+&& sudo kubectl apply -f web-service.yaml
