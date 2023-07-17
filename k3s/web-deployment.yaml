@@ -17,5 +17,6 @@ spec:
       containers:
         - name: nodeapp
           image: vikrantshah/pet-detection-web:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

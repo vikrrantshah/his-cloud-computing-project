@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  selector:
+    matchLabels:
+      app: minio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: minio-volume
+      containers:
+        - name: minio
+          image: minio/minio:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - server
+            - /storage
+          env:
+            - name: MINIO_ACCESS_KEY
+              value: "f0761ac41d8292f416e42c6e7a7a2d1adfef90c50d4b765064d16a6055870b61"
+            - name: MINIO_SECRET_KEY
+              value: "80d904a77ee85b9ff5d1ce814ac4e20f46c5694d8bc704f3428d790c4ed8af9e"
+          ports:
+            - containerPort: 9000
+              hostPort: 9000
+          volumeMounts:
+            - name: storage
+              mountPath: "/storage"

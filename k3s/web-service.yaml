@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeapp
+  name: pet-detection-service
 spec:
   selector:
-    app: nodeapp
+    app: pet-detection-service
   type: LoadBalancer
   ports:
-    - name: nodeapp
+    - name: pet-detection-service
       port: 3000
       targetPort: 3000
